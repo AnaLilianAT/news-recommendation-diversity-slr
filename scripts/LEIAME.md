@@ -1,15 +1,24 @@
-# Formulário revisado e gráficos — RSL Diversidade em recomendação de notícias
+# Scripts de análise
 
 ## Arquivos
-- `Qualidade_e_extracao_de_dados_revisado.xlsx`
-  - **Extração de dados**: formulário com a taxonomia revisada (cabeçalhos em amarelo = campos recodificados ou novos; última coluna = notas da revisão por estudo).
-  - **Livro de códigos**: cada categoria com definição e critério de uso.
-  - **Mapeamento antigo-novo**: o que aconteceu com cada categoria antiga e por quê.
-  - **Log de alterações**: valor original × revisado, por estudo e campo.
-  - **Extração (original)**: cópia intacta do formulário anterior.
-  - Abas Qualidade e Taxa de citações: inalteradas.
-- `gerar_graficos.py`: lê o formulário revisado (sem normalização de texto: as categorias já são controladas).
-- `graficos/`: figuras em PNG (300 dpi) e PDF, e `tabelas/` com as contagens em CSV.
+- `gerar_graficos.py`: lê o formulário de extração e a exportação do Parsifal e gera as figuras (PNG em 300 dpi e PDF), organizadas por questão de pesquisa, e as tabelas de contagem em CSV (subpasta `tabelas/`), incluindo os motivos de exclusão por etapa.
+- `analise_sensibilidade.py`: compara a distribuição das categorias dos principais campos do formulário no conjunto completo de estudos incluídos e no subconjunto de qualidade moderada ou alta (Q ≥ 0,50), conforme previsto no protocolo.
+- `requirements.txt`: dependências.
 
-## Como regenerar
-Coloque o .xlsx revisado e `artigos_aceitos_etapa_final.xls` na pasta do script e rode `python gerar_graficos.py`.
+## Entradas
+- `quality_and_data_extraction/Qualidade_e_extracao_de_dados.xlsx`
+  - **Qualidade**: respostas às questões de avaliação da qualidade e escore de cada estudo.
+  - **Extração de dados**: formulário com as categorias controladas.
+  - **Livro de códigos**: definição e critério de uso de cada categoria.
+  - **Taxa de citações por ano**: taxa média de citações por ano de cada estudo e seu percentil.
+- `selection/artigos aceitos etapa final.xls`: exportação do Parsifal.
+
+## Como executar
+Ver o `README.md` na raiz do repositório. Os dois scripts recebem os caminhos dos arquivos de entrada e da pasta de saída como argumentos:
+
+```bash
+python scripts/gerar_graficos.py <formulario.xlsx> <parsifal.xls> <pasta_saida>
+python scripts/analise_sensibilidade.py <formulario.xlsx> <pasta_saida>
+```
+
+Defina `SEM_TITULOS=1` para gerar as figuras sem título.

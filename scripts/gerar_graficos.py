@@ -627,7 +627,7 @@ def main():
 
     # ============================== RQ4 ==============================================
     P4 = "RQ4_datasets"
-    base_ds = lambda t: "Coletado pelos autores (próprio)" if t.startswith("Próprio") else re.sub(r"\s*\(.*\)$", "", t)
+    base_ds = lambda t: "Conjunto próprio dos autores" if t.startswith("Próprio") else re.sub(r"\s*\(.*\)$", "", t)
     ds = df["Dataset"].map(lambda v: list(OrderedDict.fromkeys(base_ds(t) for t in dividir(v))))
     barras_h(contar_listas(ds), N, "Datasets utilizados", P4, "01_datasets",
              sub_multi + "; versões do mesmo dataset agrupadas", destaque={"Não informado"})
